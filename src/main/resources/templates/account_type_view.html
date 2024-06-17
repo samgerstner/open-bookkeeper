@@ -1,0 +1,93 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Open Bookkeeper | Home</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link th:replace="~{fragments/dependencies.html}" />
+  </head>
+  <body>
+    <div th:replace="~{fragments/navigation.html}"></div>
+    <h2>View Account Types</h2>
+    <div>
+      <form th:action="@{/account-types/view}" id="searchForm">
+        <div class="row d-flex">
+          <div class="col-md-6 mt-2">
+            <div class="search">
+              <i class="fa fa-search"></i>
+              <input id="search" type="search" name="search" th:value="${search}" required class="form-control"
+                     placeholder="Enter search">
+              <button type="submit" class="btn btn-secondary">Search</button>
+            </div>
+          </div>
+          <div class="col-md-3 input-group mt-2">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="pageSize">Items per page:</label>
+            </div>
+            <select form="searchForm" name="size" th:value="${pageSize}" onchange="changePageSize()" class="size-select"
+                    id="pageSize">
+              <option th:each="s : ${ {5, 10, 15, 20, 25, 50, 100, 250} }" th:value="${s}" th:text="${s}" th:selected="${s == pageSize}"></option>
+            </select>
+          </div>
+          <div class="col-md-1 mt-2">
+            <button id="btnClear" class="btn btn-info">Clear</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div th:if="${accountTypes.size() > 0}">
+      <table class="table table-hover table-responsive-xl">
+        <thead class="thead-dark">
+          <tr>
+            <th th:replace="~{fragments/sorting :: sorting('id', 'ID', 'account-types')}"></th>
+            <th th:replace="~{fragments/sorting :: sorting('type', 'Type', 'account-types')}"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="type : ${accountTypes}">
+            <th scope="row">[[${type.id}]]</th>
+            <td>[[${type.type}]]</td>
+            <td>
+              <a th:href="@{'/account-types/edit?id=' + ${type.id}}" title="Edit account type"
+                 class="fa-regular fa-pen-to-square icon-dark"></a>
+
+              <a th:href="@{'/account-types/delete?id=' + ${type.id}}" id="btnDelete"
+                 title="Delete this client" class="fa-regular fa-trash-can icon-dark btn-delete"></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div th:unless="${accountTypes.size() > 0}">
+      <span>No account types found!</span>
+    </div>
+
+    <nav aria-label="Pagination" th:if="${totalPages > 0}">
+      <ul class="pagination justify-content-center">
+        <li class="page-item" th:classappend="${currentPage == 1} ? 'disabled'">
+          <a th:replace="~{fragments/paging :: paging(1, '<<', 'First Page', 'account-types')}"></a>
+        </li>
+        <li class="page-item font-weight-bold" th:classappend="${currentPage == 1} ? 'disabled'">
+          <a th:replace="~{fragments/paging :: paging(${currentPage - 1}, 'Prev', 'Previous Page', 'account-types')}"></a>
+        </li>
+        <li class="page-item disabled" th:if="${currentPage - 2 > 1}">
+          <a class="page-link" href="#">...</a>
+        </li>
+        <li class="page-item" th:classappend="${page == currentPage} ? 'active'"
+            th:each="page : ${#numbers.sequence(currentPage > 2 ? currentPage - 2 : 1, currentPage + 2 < totalPages ? currentPage + 2 : totalPages)}">
+          <a th:replace="~{fragments/paging :: paging(${page}, ${page}, 'Page ' + ${page}, 'account-types')}"></a>
+        </li>
+        <li class="page-item disabled" th:if="${currentPage + 2 < totalPages}">
+          <a class="page-link" href="#">...</a>
+        </li>
+        <li class="page-item font-weight-bold" th:classappend="${currentPage == totalPages} ? 'disabled'">
+          <a th:replace="~{fragments/paging :: paging(${currentPage + 1},'Next', 'Next Page', 'account-types')}"></a>
+        </li>
+        <li class="page-item" th:classappend="${currentPage == totalPages} ? 'disabled'">
+          <a th:replace="~{fragments/paging :: paging(${totalPages}, '>>', 'Last Page', 'account-types')}"></a>
+        </li>
+      </ul>
+    </nav>
+
+  </body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Open Bookkeeper | Home</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link th:replace="~{fragments/dependencies.html}" />
+    </head>
+    <body>
+        <div th:replace="~{fragments/navigation.html}"></div>
+        <h2>Create Vendor</h2>
+        <form action="#" th:action="@{/vendors/create}" th:object="${vendor}" method="post" class="form-floating">
+            <div class="form-floating col-lg-4">
+                <input type="text" id="legalName" class="form-control" placeholder="Vendor Legal Name" th:field="*{legalName}" required>
+                <label for="legalName">Vendor Legal Name</label>
+            </div>
+            <div class="form-floating col-lg-4">
+                <input type="text" id="displayName" class="form-control" placeholder="Vendor Display Name" th:field="*{displayName}" required>
+                <label for="displayName">Vendor Display Name</label>
+            </div>
+            <div class="form-floating col-lg-4">
+                <input type="text" id="contactTitle" class="form-control" placeholder="Vendor Contact Title" th:field="*{contactTitle}">
+                <label for="contactTitle">Vendor Legal Name</label>
+            </div>
+            <div class="form-floating col-lg-4">
+                <input type="text" id="contactFirstName" class="form-control" placeholder="Vendor Contact First Name" th:field="*{contactFirstName}">
+                <label for="contactFirstName">Vendor Contact First Name</label>
+            </div>
+            <div class="form-floating col-lg-4">
+                <input type="text" id="contactLastName" class="form-control" placeholder="Vendor Contact Last Name" th:field="*{contactLastName}">
+                <label for="contactLastName">Vendor Contact Last Name</label>
+            </div>
+            <div class="form-floating col-lg-4">
+                <input type="text" id="contactSuffix" class="form-control" placeholder="Vendor Contact Suffix" th:field="*{contactSuffix}">
+                <label for="contactSuffix">Vendor Contact Suffix</label>
+            </div>
+            <div class="form-floating col-lg-4">
+                <input type="email" id="email" class="form-control" placeholder="Vendor Email" th:field="*{email}">
+                <label for="email">Vendor Email</label>
+            </div>
+            <div class="form-floating col-lg-4">
+                <input type="tel" id="phone" class="form-control" placeholder="Vendor Phone" th:field="*{phone}">
+                <label for="phone">Vendor Phone</label>
+            </div>
+            <div class="form-floating col-lg-4">
+                <input type="tel" id="mobilePhone" class="form-control" placeholder="Vendor Mobile Phone" th:field="*{mobile}">
+                <label for="mobilePhone">Vendor Mobile Phone</label>
+            </div>
+            <div class="form-floating col-lg-4">
+                <input type="tel" id="fax" class="form-control" placeholder="Vendor Fax" th:field="*{fax}">
+                <label for="fax">Vendor Fax</label>
+            </div>
+            <div class="form-floating col-lg-4">
+                <input type="text" id="website" class="form-control" placeholder="Vendor Website" th:field="*{website}">
+                <label for="website">Vendor Website</label>
+            </div>
+            <div class="form-floating col-lg-4">
+                <input type="text" id="address1" class="form-control" placeholder="Vendor Address Line 1" th:field="*{address1}">
+                <label for="address1">Vendor Address Line 1</label>
+            </div>
+            <div class="form-floating col-lg-4">
+                <input type="text" id="address2" class="form-control" placeholder="Vendor Address Line 2" th:field="*{address2}">
+                <label for="address2">Vendor Address Line 2</label>
+            </div>
+            <div class="form-floating col-lg-4">
+                <input type="text" id="city" class="form-control" placeholder="Vendor Address City" th:field="*{city}">
+                <label for="city">Vendor Address City</label>
+            </div>
+            <div class="form-floating col-lg-4">
+                <input type="text" id="state" class="form-control" placeholder="Vendor Address State" th:field="*{state}">
+                <label for="state">Vendor Address State</label>
+            </div>
+            <div class="form-floating col-lg-4">
+                <input type="text" id="zip" class="form-control" placeholder="Vendor Address Zip Code" th:field="*{zip}">
+                <label for="zip">Vendor Address Zip Code</label>
+            </div>
+            <div class="form-floating col-lg-4">
+                <input type="text" id="country" class="form-control" placeholder="Vendor Address Country" th:field="*{country}">
+                <label for="country">Vendor Address Country</label>
+            </div>
+            <div class="form-floating col-lg-4">
+                <textarea id="notes" class="form-control" rows="3" th:field="*{notes}"></textarea>
+                <label for="notes">Vendor Notes</label>
+            </div>
+            <div class="form-floating col-lg-4">
+                <input type="text" id="taxID" class="form-control" placeholder="Vendor Tax ID" th:field="*{taxID}">
+                <label for="taxID">Vendor Tax ID</label>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="reset" class="btn btn-secondary">Reset</button>
+            </div>
+        </form>
+    </body>
+</html>

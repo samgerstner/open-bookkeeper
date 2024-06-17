@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Open Bookkeeper | Home</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link th:replace="~{fragments/dependencies.html}" />
+    </head>
+    <body>
+        <div th:replace="~{fragments/navigation.html}"></div>
+        <h2>Create New Journal Entry</h2>
+        <form action="#" th:action="@{/journals/create}" th:object="${journalEntry}" method="post">
+            <div class="form-group">
+                <label for="journalDate">Journal Date</label>
+                <input type="date" id="journalDate" class="form-control" th:field="*{journalDate}">
+            </div>
+            <div class="form-group">
+                <label for="journalName">Journal Name</label>
+                <input type="text" id="journalName" class="form-control" placeholder="Journal Name" th:field="*{journalName}">
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="true" id="isAdjustingEntry" th:field="*{isAdjustingEntry()}">
+                <label class="form-check-label" for="isAdjustingEntry">
+                    Is Adjusting Entry
+                </label>
+            </div>
+            <table>
+                <thead>
+                <tr>
+                    <th>Account</th>
+                    <th>Debits</th>
+                    <th>Credits</th>
+                    <th>Description</th>
+                    <th>Vendor</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="row : *{entryRows}">
+                    <td>[[${row.account.accountNumber}]]</td>
+                    <td>[[${row.debitAmount}]]</td>
+                    <td>[[${row.creditAmount}]]</td>
+                    <td>[[${row.description}]]</td>
+                    <td>[[${row.vendor.displayName}]]</td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="form-group">
+                <label for="memo">Memo</label>
+                <textarea id="memo" class="form-control" rows="3" th:field="*{memo}"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="attachments">Journal Attachments</label>
+                <input id="attachments" class="form-control" type="file" multiple>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="reset" class="btn btn-secondary">Reset</button>
+            </div>
+        </form>
+    </body>
+</html>

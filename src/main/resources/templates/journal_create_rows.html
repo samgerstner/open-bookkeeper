@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Open Bookkeeper | Home</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link th:replace="~{fragments/dependencies.html}" />
+    </head>
+    <body>
+        <div th:replace="~{fragments/navigation.html}"></div>
+        <h2>Create New Journal Entry</h2>
+        <p>Please enter the transaction details below. You will be able to enter additional information and upload attachments on the next page.</p>
+        <form action="#" th:action="@{/journals/create-rows}" th:object="${rows}" method="post">
+            <table>
+                <thead>
+                <tr>
+                    <th>Account</th>
+                    <th>Debits</th>
+                    <th>Credits</th>
+                    <th>Description</th>
+                    <th>Vendor</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="row, stat : *{rows}">
+                        <td>
+                            <select th:field="*{rows[__${stat.index}__].account.id}">
+                                <option th:each="account : ${accounts}" th:value="${account.id}" th:text="${account.accountNumber} + ' (' + ${account.accountName} + ')'"></option>
+                            </select>
+                        </td>
+                        <td><input type="number" step="any" th:field="*{rows[__${stat.index}__].debitAmount}"></td>
+                        <td><input type="number" step="any" th:field="*{rows[__${stat.index}__].creditAmount}"></td>
+                        <td><input type="text" th:field="*{rows[__${stat.index}__].description}"></td>
+                        <td>
+                            <select th:field="*{rows[__${stat.index}__].vendor.id}">
+                                <option th:each="vendor : ${vendors}" th:value="${vendor.id}" th:text="${vendor.displayName}"></option>
+                            </select>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <input type="submit" id="submitButton" th:value="Next">
+            <input type="reset" id="resetButton" name="reset" th:value="Reset"/>
+        </form>
+    </body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Open Bookkeeper | Home</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link th:replace="~{fragments/dependencies.html}" />
+  </head>
+  <body>
+    <div th:replace="~{fragments/navigation.html}"></div>
+    <h2>Delete Account</h2>
+    <p th:text="'Are you sure that you want to delete the ' + ${account.accountNumber} + ' account? This action cannot be un-done.'"></p>
+    <form action="#" th:action="@{'/accounts/delete?id=' + ${account.id}}" method="post">
+      <div class="form-group">
+        <button type="submit" class="btn btn-danger">Delete Account</button>
+        <a th:href="@{/accounts/view}"><button type="button" class="btn btn-secondary">Cancel</button></a>
+      </div>
+    </form>
+  </body>
+</html>
